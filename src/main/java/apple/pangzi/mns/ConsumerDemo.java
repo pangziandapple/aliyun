@@ -1,5 +1,6 @@
 package apple.pangzi.mns;
 
+import apple.pangzi.config.MnsAccountConfig;
 import com.aliyun.mns.client.CloudAccount;
 import com.aliyun.mns.client.CloudQueue;
 import com.aliyun.mns.client.MNSClient;
@@ -9,10 +10,10 @@ import com.aliyun.mns.model.Message;
 public class ConsumerDemo {
 
     public void work() {
-        CloudAccount account = new CloudAccount(MnsAccount.accessId, MnsAccount.accessKey, MnsAccount.endpoint);
+        CloudAccount account = new CloudAccount(MnsAccountConfig.accessId, MnsAccountConfig.accessKey, MnsAccountConfig.endpoint);
         MNSClient client = account.getMNSClient();
         try {
-            CloudQueue queue = client.getQueueRef(MnsAccount.queueName);
+            CloudQueue queue = client.getQueueRef(MnsAccountConfig.queueName);
             while (true){
                 Message popMsg = queue.popMessage(30);
                 if (popMsg != null) {
